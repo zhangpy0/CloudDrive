@@ -5,8 +5,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -45,13 +47,22 @@ public class FileService {
         String fileName = file.getOriginalFilename();
         File newFile = new File(userDirPath + fileName);
         try {
-            file.transferTo(newFile);
+            FileOutputStream fos = new FileOutputStream(newFile);
+            BufferedInputStream bis = new BufferedInputStream(file.getInputStream());
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = bis.read(buffer)) > 0) {
+                fos.write(buffer, 0, len);
+            }
+            fos.close();
+            bis.close();
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
+
 
     public boolean DownloadFile(User user, String fileName, HttpServletResponse response) {
         String userDirPath = getUserDirPath(user);
