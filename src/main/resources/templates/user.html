@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:object="${user}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户界面</title>
+    <link rel="stylesheet" href="css/upload.css">
+</head>
+<body>
+<div class="container">
+    <div class="drop">
+        <div class="content">
+
+            <h2 th:text="'WelCome!  ' + ${user.username}"></h2>
+        </div>
+    </div>
+    <a href="index" class="btns check">退出重新登录</a>
+    <a href="upload" class="btns back">上传文件</a>
+    <a href="FileList" class="btns filelist">查看文件列表</a>
+</div>
+</body>
+</html>

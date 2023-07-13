@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Backend File Downloads</title>
+  <link rel="stylesheet" href="css/filelist.css"/>
+</head>
+<body>
+<div class="container">
+  <h1 th:text="${user.username} + '\'s Files'"></h1>
+  <ul class="file-list">
+      <li th:each="file : ${fileNames}">
+        <a th:href="@{/download/{filename}(filename=${file})}" th:text="${file}"></a>
+      </li>
+  </ul>
+</div>
+</body>
+</html>

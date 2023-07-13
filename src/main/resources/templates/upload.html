@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="css/upload.css">
+</head>
+<body>
+<div class="container">
+    <div class="drop">
+        <div class="content">
+            <h2>file Upload</h2>
+            <ul>
+                <li>
+                    <label>username：</label>
+                    <span th:text="${user.username}"></span>
+                </li>
+                <li>
+                    <label>file count：</label>
+                    <span th:text="${fileCount}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <form action="uploadFile" method="post" enctype="multipart/form-data">
+        <input type="file" class="btns back" name="file" value="选择">
+        <input type="submit" class="btns check" value="上传">
+    </form>
+</div>
+</body>
+</html>
