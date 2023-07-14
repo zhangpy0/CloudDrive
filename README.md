@@ -33,7 +33,7 @@
                 username: yourusername
                 password: yourpassword
         ```
-- 4.运行项目
+- 4.运行项目 (项目目录下需要有file文件夹，用于存放上传的文件)
 - 5.访问localhost:8080
  
 ### 打包jar
@@ -51,6 +51,6 @@
                 password: yourpassword
         ```
 - 3.maven打包 `mvn clean package`
-- 4.运行jar `java -jar ./target/CloudDrive-0.0.1-SNAPSHOT.jar`
+- 4.运行jar `java -jar ./target/CloudDrive-0.0.1-SNAPSHOT.jar` (jar包同级目录下需要有file文件夹，用于存放上传的文件)
 
 ## 感谢支持🥰🥰🥰
