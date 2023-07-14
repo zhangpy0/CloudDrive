@@ -19,22 +19,38 @@
 ## 使用方法
 
 ### 直接运行
-    - 1.克隆项目到本地 `git clone https://github.com/zhangpy0/CloudDrive.git`
-    - 2.导入IDEA
-    - 3.数据库配置
-        - 3.1.创建数据库`mysql -u root -p` 
-        - 3.2.修改application.properties中的数据库配置
-        - 3.3.运行data文件夹中的sql文件 `source usertable.sql`
-    - 4.运行项目
-    - 5.访问localhost:8080
+- 1.克隆项目到本地 `git clone https://github.com/zhangpy0/CloudDrive.git`
+- 2.导入IDEA
+- 3.数据库配置
+    - 3.1.进入数据库`mysql -u yourusername -p` 
+    - 3.2.在mysql里运行data文件夹中的sql文件 `source usertable.sql`
+    - 3.3.修改application.yml中的数据库配置
+        ```
+        spring:
+            datasource:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                url: jdbc:mysql://localhost:3306/CloudDrive
+                username: yourusername
+                password: yourpassword
+        ```
+- 4.运行项目
+- 5.访问localhost:8080
  
 ### 打包jar
-    - 1.克隆项目到本地 `git clone https://github.com/zhangpy0/CloudDrive.git`
-    - 2.数据库配置
-        - 2.1.创建数据库`mysql -u root -p` 
-        - 2.2.修改application.properties中的数据库配置
-        - 2.3.运行data文件夹中的sql文件 `source usertable.sql`
-    - 3.maven打包 `mvn clean package`
-    - 4.运行jar `java -jar target/CloudDrive-0.0.1-SNAPSHOT.jar`
+- 1.克隆项目到本地 `git clone https://github.com/zhangpy0/CloudDrive.git`
+- 2.数据库配置
+    - 2.1.进入数据库`mysql -u yourusername -p` 
+    - 2.2.在mysql里运行data文件夹中的sql文件 `source usertable.sql`
+    - 2.3.修改application.yml中的数据库配置
+        ```
+        spring:
+            datasource:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                url: jdbc:mysql://localhost:3306/CloudDrive
+                username: yourusername
+                password: yourpassword
+        ```
+- 3.maven打包 `mvn clean package`
+- 4.运行jar `java -jar ./target/CloudDrive-0.0.1-SNAPSHOT.jar`
 
 ## 感谢支持🥰🥰🥰
