@@ -14,17 +14,23 @@ import java.nio.charset.StandardCharsets;
 
 @Service
 public class FileService {
-    private static final String fileRootPath = System.getProperty("user.dir") + "\\file\\";
+    private static final String fileRootPath = System.getProperty("user.dir") + "/file/";
+
+    public String getFileRootPath() {
+        return fileRootPath;
+    }
 
     public String getUserDirPath(User user) {
-        return fileRootPath + user.getUsername() + "\\";
+        return fileRootPath + user.getUsername() + "/";
     }
 
     public boolean CreateUserDir(User user) {
         String userDirPath = getUserDirPath(user);
         File userDir = new File(userDirPath);
         if (!userDir.exists()) {
-            return userDir.mkdir();
+            if (!userDir.mkdirs()) {
+                throw new RuntimeException("create user dir failed");
+            }
         }
         return true;
     }

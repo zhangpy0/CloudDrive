@@ -35,6 +35,7 @@ public class pageController {
     @RequestMapping("/index")
     public String index(){
         logger.info(System.getProperty("user.dir"));
+        logger.info(fileService.getFileRootPath());
         return "index";
     }
 
