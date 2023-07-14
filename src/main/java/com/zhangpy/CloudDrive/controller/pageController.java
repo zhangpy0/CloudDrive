@@ -1,15 +1,15 @@
 package com.zhangpy.CloudDrive.controller;
 
-import com.zhangpy.CloudDrive.service.FileService;
-import com.zhangpy.CloudDrive.util.StringJudge;
 import com.zhangpy.CloudDrive.bean.User;
+import com.zhangpy.CloudDrive.service.FileService;
 import com.zhangpy.CloudDrive.service.UserService;
+import com.zhangpy.CloudDrive.util.StringJudge;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,21 +19,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.List;
 
 @Controller
 public class pageController {
 
     private static final Logger logger = LoggerFactory.getLogger(pageController.class);
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private FileService fileService;
 
     @RequestMapping("/index")
-    public String index(){
+    public String index(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session != null){
+            session.invalidate();
+        }
         logger.info(System.getProperty("user.dir"));
         logger.info(fileService.getFileRootPath());
         return "index";
@@ -89,7 +92,7 @@ public class pageController {
                             @RequestParam(value = "password2") String password2,
                            @RequestParam(value = "email") String email,
                            Model model){
-        logger.info("username:"+username+" password1:"+password1+" password2"+password2+" email:"+email);
+        logger.info("username:"+username+" password1:"+password1+" password2:"+password2+" email:"+email);
         if(!password1.equals(password2)){
             logger.error("两次密码不一致");
             model.addAttribute("msg","两次密码不一致");
@@ -163,7 +166,7 @@ public class pageController {
     @RequestMapping("/uploadFile")
     public String uploadFile(HttpServletRequest request,
                              @RequestParam(value = "file") MultipartFile file,
-                             Model model) throws Exception {
+                             Model model) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user==null) {
@@ -196,7 +199,6 @@ public class pageController {
             for (int i=0;i<files.length;i++){
                 fileNames[i] = files[i].getName();
             }
-            int fileCount = files.length;
             model.addAttribute("user",user);
             model.addAttribute("fileNames",fileNames);
             return "FileList";
@@ -207,7 +209,7 @@ public class pageController {
     public String download(HttpServletRequest request,
                            HttpServletResponse response,
                            @PathVariable("fileName") String fileName,
-                           Model model) throws Exception {
+                           Model model) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user==null){
