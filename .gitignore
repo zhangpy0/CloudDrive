@@ -34,3 +34,6 @@ build/
 
 ### FILE ###
 file/
+
+### OTHERS ###
+.gitattributes
